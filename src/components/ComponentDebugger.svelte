@@ -1,36 +1,35 @@
 <script lang="ts">
-	import AllSchemeTable from '../../components/AllSchemesTable.svelte';
-	import ControlTable from '../../components/ControlTable.svelte';
-	import PropsTable from '../../components/PropsTable.svelte';
-	import SlotTable from '../../components/SlotTable.svelte';
-	import InfoTable from '../../components/InfoTable.svelte';
-	import InstallTable from '../../components/InstallTable.svelte';
-	import I18nTable from '../../components/LangTable.svelte';
-	import CssPartsTable from '../../components/CssPartsTable.svelte';
-	import CssVarsTable from '../../components/CssVarsTable.svelte';
-	import EventsTable from '../../components/EventsTable.svelte';
-	import { componentsVersion, debugVersion, lang, componentsList } from '../../stores/app';
-	import { events, htmlSlotsContents, cssVarsValues, cssPartsContents } from '../../stores/events';
+	import AllSchemeTable from './AllSchemesTable.svelte';
+	import ControlTable from './ControlTable.svelte';
+	import PropsTable from './PropsTable.svelte';
+	import SlotTable from './SlotTable.svelte';
+	import InfoTable from './InfoTable.svelte';
+	import InstallTable from './InstallTable.svelte';
+	import I18nTable from './LangTable.svelte';
+	import CssPartsTable from './CssPartsTable.svelte';
+	import CssVarsTable from './CssVarsTable.svelte';
+	import EventsTable from './EventsTable.svelte';
+	import { componentsVersion, debugVersion, lang, componentsList } from '../stores/app';
+	import { events, htmlSlotsContents, cssVarsValues, cssPartsContents } from '../stores/events';
 	import { page } from '$app/stores';
 	import compareVersions from 'compare-versions';
 	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 
 	// import { getAbbreviatedPackument } from 'query-registry';
 
-	import { pageName } from '../../stores/app';
-
-	let name: string;
-
-	let controlTab: 'props' | 'schemes' | 'events' | 'style' | 'slots' | 'install' | 'i18n' | 'info';
+	let controlTab: 'props' | 'schemes' | 'events' | 'style' | 'slots' | 'install' | 'i18n' | 'info' =
+		'info';
 
 	let com: string;
 	let cdnUri: string;
 	let args: string;
-	let lastName: string;
+
 	let allCssVars: { name: string; value: string }[];
 	let meta: ComponentSetup;
 
 	let lastLoadId = 'none';
+
+	export let repo_name: string;
 
 	async function loadMeta(repoName: string, version: string) {
 		meta = null;
@@ -40,10 +39,10 @@
 			);
 			meta = await pageraw.json();
 		} catch (err) {
-			console.warn(`failed to fetch manifest for ${$pageName}`);
+			console.warn(`failed to fetch manifest for ${repoName}`);
 		}
 	}
-	let componentVersions: { name: string; versions: string[] };
+	let componentVersions: { repoName: string; versions: string[] };
 	async function getComponentVersions(repoName: string) {
 		try {
 			const pageraw = await fetch(`https://registry.npmjs.cf/${repoName}`);
@@ -54,34 +53,23 @@
 			);
 
 			componentVersions = {
-				name,
+				repoName: repoName,
 				versions: availableVersions
 			};
 		} catch (err) {
-			console.warn(`failed to fetch npm versions for ${$pageName}`);
+			console.warn(`failed to fetch npm versions for ${repoName}`);
 		}
 	}
-	let shortMeta: Partial<ComponentSetup>;
+
 	$: {
-		name = $page.url?.href?.split('c=')?.[1]?.split('&')[0];
-		if (!componentVersions || componentVersions.name !== name) {
-			shortMeta = $componentsList.packages.find((f) => f.name === name);
-			getComponentVersions(shortMeta.repoName).catch(console.error);
+		if (!componentVersions || componentVersions.repoName !== repo_name) {
+			getComponentVersions(repo_name).catch(console.error);
 		}
-		if ($page.url?.href?.split?.('version=')?.[1]?.split?.('&')?.[0]?.length) {
-			debugVersion.set($page.url.href.split('version=')[1].split('&')[0]);
-		} else {
-			debugVersion.set(shortMeta.version);
-		}
-		if (!lastName || lastName !== name) {
-			lastName = name;
-			controlTab = 'info';
-		}
-		pageName.set(name || 'docs');
-		const tmpLoadId = name + '_' + $debugVersion;
-		if (name && (!meta || tmpLoadId !== lastLoadId) && $debugVersion) {
+
+		const tmpLoadId = repo_name + '_' + $debugVersion;
+		if (repo_name && (!meta || tmpLoadId !== lastLoadId) && $debugVersion) {
 			meta = null;
-			loadMeta(shortMeta.repoName, $debugVersion).catch(console.error);
+			loadMeta(repo_name, $debugVersion).catch(console.error);
 			lastLoadId = tmpLoadId;
 		}
 
@@ -90,15 +78,15 @@
 			args = meta.examples[0];
 
 			com = '';
-			if ($cssPartsContents.filter((f) => f.component === name)?.length) {
+			if ($cssPartsContents.filter((f) => f.component === meta.name)?.length) {
 				com += '<sty' + 'le>';
-				for (const p of $cssPartsContents.filter((f) => f.component === name)) {
-					com += `${$pageName}::part(${p.name}){${p.content}}`;
+				for (const p of $cssPartsContents.filter((f) => f.component === meta.name)) {
+					com += `${meta.name}::part(${p.name}){${p.content}}`;
 				}
 				com += '</sty' + 'le>';
 			}
 
-			com += `<${name} id="com-${name}"`;
+			com += `<${meta.name} id="com-${meta.name}"`;
 			// if (lang && !args?.['i18nlang'] && meta?.i18n?.length) {
 			// 	com += ` i18nlang="${lang}"`;
 			// }
@@ -131,19 +119,23 @@
 				com += `"`;
 			}
 			com += ` >`;
-			if ($htmlSlotsContents.filter((f) => f.component === name)?.length) {
-				for (const sl of $htmlSlotsContents.filter((f) => f.component === name)) {
+			if ($htmlSlotsContents.filter((f) => f.component === meta.name)?.length) {
+				for (const sl of $htmlSlotsContents.filter((f) => f.component === meta.name)) {
 					com += `<div slot="${sl.name}">${sl.content}</div>`;
 				}
 			}
 
-			com += `</${name}>`;
+			com += `</${meta.name}>`;
 
 			com += ` />`;
-			cdnUri = `<${'script'} id="${name}-script" src="https://cdn.jsdelivr.net/npm/@htmlbricks/${name}@${$componentsVersion}/release/release.js"></${'script'}>`;
+			cdnUri = `<${'script'} id="${
+				meta.name
+			}-script" src="https://cdn.jsdelivr.net/npm/@htmlbricks/${
+				meta.name
+			}@${$componentsVersion}/release/release.js"></${'script'}>`;
 
 			allCssVars = $cssVarsValues
-				.filter((f) => f.component === name)
+				.filter((f) => f.component === meta.name)
 				?.map((m) => {
 					return { name: m.name, value: m.value };
 				});
@@ -181,12 +173,12 @@
 </script>
 
 <div class="container-fluid">
-	{#if name && meta && args}
+	{#if meta && args}
 		<div style="margin-top:40px; padding-right:0px" class="row">
 			<div class="col-7">
 				<div>
 					<h3 style="text-align:center">
-						{$pageName} version
+						{meta.name} version
 						{#if componentVersions?.versions?.length && Array.isArray(componentVersions.versions)}
 							<hb-input-select
 								style="width:150px;display:inline-block;"
@@ -213,17 +205,17 @@
 							style="width:100%;height:600px"
 							title="component"
 							src="/playgrounds/sandbox?slots={$htmlSlotsContents.filter(
-								(f) => f.component === name
+								(f) => f.component === meta.name
 							)?.length
 								? encodeURIComponent(
-										JSON.stringify($htmlSlotsContents.filter((f) => f.component === name))
+										JSON.stringify($htmlSlotsContents.filter((f) => f.component === meta.name))
 								  )
 								: ''}&css={allCssVars.length
 								? encodeURIComponent(JSON.stringify(allCssVars))
-								: ''}&component={name}&params={encodeURIComponent(
+								: ''}&component={meta.name}&params={encodeURIComponent(
 								JSON.stringify(args)
 							)}&parts={encodeURIComponent(
-								JSON.stringify($cssPartsContents.filter((f) => f.component === name))
+								JSON.stringify($cssPartsContents.filter((f) => f.component === meta.name))
 							)}&version={$debugVersion}"
 						/>
 					</div>
@@ -283,11 +275,11 @@
 								? 'active'
 								: ''}"
 							>slots <span
-								style={$htmlSlotsContents?.filter((f) => f.component === $pageName).length
+								style={$htmlSlotsContents?.filter((f) => f.component === meta.name).length
 									? 'color:red;'
 									: ''}
 								class="badge bg-secondary"
-								>{$htmlSlotsContents?.filter((f) => f.component === $pageName).length || 0}/{meta
+								>{$htmlSlotsContents?.filter((f) => f.component === meta.name).length || 0}/{meta
 									.htmlSlots?.length || 0}</span
 							></button
 						>
@@ -319,14 +311,14 @@
 								? ''
 								: 'disabled'} {controlTab === 'events' ? 'active' : ''}"
 							>events
-							{#if $events?.filter((f) => f.component === name)?.length && meta?.definitions?.events?.definitions?.Events?.properties && Object.keys(meta.definitions.events.definitions.Events.properties)?.length}
+							{#if $events?.filter((f) => f.component === meta.name)?.length && meta?.definitions?.events?.definitions?.Events?.properties && Object.keys(meta.definitions.events.definitions.Events.properties)?.length}
 								<span
 									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
 								>
-									{#if !$events?.filter((f) => f.component === name)?.length}
+									{#if !$events?.filter((f) => f.component === meta.name)?.length}
 										0
-									{:else if $events?.filter((f) => f.component === name)?.length < 100}
-										{$events?.filter((f) => f.component === name)?.length?.toString()}
+									{:else if $events?.filter((f) => f.component === meta.name)?.length < 100}
+										{$events?.filter((f) => f.component === meta.name)?.length?.toString()}
 									{:else}
 										99+
 									{/if}

@@ -6,9 +6,10 @@
 	// export let definition: any;
 	// export let storybookargs: any;
 	// export let args: any;
+	let loading = true;
 	let content;
 	async function fetchInfo() {
-		content = 'loading';
+		loading = true;
 		try {
 			const pageraw = await fetch(
 				`https://cdn.jsdelivr.net/gh/dottgonzo/bootstrap-webcomponents-monorepo@${$debugVersion}/packages/${$pageName.replace(
@@ -18,17 +19,21 @@
 			);
 			const txt = await pageraw.text();
 			const md = new MarkdownIt();
-
 			content = md.render(txt);
+			loading = false;
 		} catch (err) {
 			console.warn(`no readme page for ${$pageName}`);
 		}
 	}
 	$: {
-		if ($pageName) fetchInfo().catch(console.error);
+		if ($pageName.length > 1 && $debugVersion.length > 1) fetchInfo().catch(console.error);
 	}
 	// onMount(() => {
 	// });
 </script>
 
-{@html content}
+{#if !loading}
+	{@html content}
+{:else}
+	loading
+{/if}

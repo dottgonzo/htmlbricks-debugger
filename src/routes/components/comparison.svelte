@@ -56,7 +56,7 @@
 						><button
 							class="btn btn-link"
 							on:click={() => {
-								goto('/components/doc?c=' + c.name);
+								goto('/components/component?c=' + c.name);
 							}}>{c.name}</button
 						></td
 					>
