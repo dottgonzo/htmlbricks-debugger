@@ -9,9 +9,8 @@
 	import CssPartsTable from './CssPartsTable.svelte';
 	import CssVarsTable from './CssVarsTable.svelte';
 	import EventsTable from './EventsTable.svelte';
-	import { componentsVersion, debugVersion, lang, componentsList } from '../stores/app';
+	import { componentsVersion, debugVersion, lang } from '../stores/app';
 	import { events, htmlSlotsContents, cssVarsValues, cssPartsContents } from '../stores/events';
-	import { page } from '$app/stores';
 	import compareVersions from 'compare-versions';
 	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 
@@ -132,7 +131,7 @@
 				meta.name
 			}-script" src="https://cdn.jsdelivr.net/npm/@htmlbricks/${
 				meta.name
-			}@${$componentsVersion}/release/release.js"></${'script'}>`;
+			}@${$debugVersion}/release/release.js"></${'script'}>`;
 
 			allCssVars = $cssVarsValues
 				.filter((f) => f.component === meta.name)
