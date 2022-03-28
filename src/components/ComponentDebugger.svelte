@@ -46,9 +46,11 @@
 			const pageraw = await fetch(`https://registry.npmjs.cf/${repoName}`);
 			const jsonfetched = await pageraw.json();
 
-			const availableVersions = Object.keys(jsonfetched.versions).filter(
-				(f) => !repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.9.21', '>=')
-			);
+			const availableVersions = Object.keys(jsonfetched.versions)
+				.filter(
+					(f) => !repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.9.21', '>=')
+				)
+				.sort((a, b) => (compareVersions.compare(a, b, '<') ? 1 : -1));
 
 			componentVersions = {
 				repoName: repoName,
