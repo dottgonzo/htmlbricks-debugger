@@ -256,7 +256,7 @@
 		socials={JSON.stringify({
 			github: { pageUri: 'https://github.com/dottgonzo/bootstrap-webcomponents-monorepo' }
 		})}
-		on:pagechange={(e) => pageChange(e.detail)}
+		on:pageChange={(e) => pageChange(e.detail)}
 	>
 		<div slot="page">
 			<slot />

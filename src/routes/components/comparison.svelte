@@ -2,10 +2,15 @@
 	import { goto } from '$app/navigation';
 
 	import { pageName, componentsVersion, componentsList } from '../../stores/app';
-	import type allComponentsMetas from '@htmlbricks/hb-bundle/release/bundle.json';
+	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 
 	pageName.set('comparison');
-	let metas: typeof allComponentsMetas;
+	let metas: { packages: ComponentSetup[]; version: string };
+	$: {
+		if (!metas) {
+			metas = null;
+		}
+	}
 	async function fetchComponentInfo(repoName: string, version: string) {
 		try {
 			const pageraw = await fetch(
