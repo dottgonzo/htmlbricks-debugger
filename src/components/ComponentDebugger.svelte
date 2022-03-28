@@ -16,8 +16,7 @@
 
 	// import { getAbbreviatedPackument } from 'query-registry';
 
-	let controlTab: 'props' | 'schemes' | 'events' | 'style' | 'slots' | 'install' | 'i18n' | 'info' =
-		'info';
+	let controlTab: 'props' | 'schemes' | 'events' | 'style' | 'slots' | 'install' | 'i18n' | 'info';
 
 	let com: string;
 	let cdnUri: string;
@@ -74,6 +73,7 @@
 
 		// i18nLangs = meta?.i18n;
 		if (meta) {
+			controlTab = 'info';
 			args = meta.examples[0];
 
 			com = '';
