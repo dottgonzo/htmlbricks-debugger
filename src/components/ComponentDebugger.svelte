@@ -48,7 +48,9 @@
 
 			const availableVersions = Object.keys(jsonfetched.versions)
 				.filter(
-					(f) => !repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.9.21', '>=')
+					(f) =>
+						compareVersions.validate(f) &&
+						(!repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.9.21', '>='))
 				)
 				.sort((a, b) => (compareVersions.compare(a, b, '<') ? 1 : -1));
 
