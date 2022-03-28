@@ -66,6 +66,8 @@
 
 		const tmpLoadId = repo_name + '_' + $debugVersion;
 		if (repo_name && (!meta || tmpLoadId !== lastLoadId) && $debugVersion) {
+			controlTab = 'info';
+
 			meta = null;
 			loadMeta(repo_name, $debugVersion).catch(console.error);
 			lastLoadId = tmpLoadId;
@@ -73,7 +75,6 @@
 
 		// i18nLangs = meta?.i18n;
 		if (meta) {
-			controlTab = 'info';
 			args = meta.examples[0];
 
 			com = '';
