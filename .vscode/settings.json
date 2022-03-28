@@ -1,0 +1,30 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "foreground": "black",
+      "background": "#82AAFF",
+      "icon": "tag",
+      "iconColour": "#82AAFF",
+      "gutterIcon": true
+    },
+    "BUG": {
+      "foreground": "white",
+      "background": "#AC4142",
+      "icon": "bug",
+      "iconColour": "#AC4142",
+      "gutterIcon": true
+    },
+    "FIXME": {
+      "foreground": "black",
+      "background": "#FFCC00",
+      "iconColour": "#FFCC00",
+      "icon": "alert",
+      "gutterIcon": true
+    }
+  },
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "text-and-comment"
+  }
+}
