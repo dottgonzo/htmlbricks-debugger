@@ -192,7 +192,7 @@
 										options: componentVersions?.versions.map((m) => {
 											return {
 												value: m,
-												label: m + (m === $componentsVersion ? ' (latest)' : '')
+												label: m + (m === $componentsVersion ? ' (current)' : '')
 											};
 										})
 									},
