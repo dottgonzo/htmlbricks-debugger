@@ -6,6 +6,7 @@
 	let cssVars: { name: string; value: string }[];
 	let cssParts: { name: string; content: string }[];
 
+	let repo_name: string;
 	let args: any;
 	let version: string;
 	let com: string;
@@ -14,19 +15,21 @@
 
 	async function loadMeta(name: string, version: string) {
 		meta = null;
+		const uri = `https://cdn.jsdelivr.net/npm/${
+			repo_name?.split('/')?.[0] || '@htmlbricks'
+		}/${name}@${version}/release/manifest.json`;
 		try {
-			const pageraw = await fetch(
-				`https://cdn.jsdelivr.net/npm/@htmlbricks/${name}@${version}/release/manifest.json`
-			);
+			const pageraw = await fetch(uri);
 			meta = await pageraw.json();
 			console.log(meta);
 		} catch (err) {
-			console.warn(`failed to fetch manifest for ${$pageName}`);
+			console.warn(`failed to fetch manifest for ${uri}`);
 		}
 	}
 	$: {
 		name = $page.url?.href?.split('component=')?.[1]?.split('&')[0];
 		version = $page.url?.href?.split('version=')?.[1]?.split('&')[0];
+		repo_name = $page.url?.href?.split('repo_name=')?.[1]?.split('&')[0];
 		const paramsBase64 = $page.url?.href?.split('params=')?.[1]?.split('&')[0];
 		const htmlSlot64 = $page.url?.href?.split('slots=')?.[1]?.split('&')[0];
 		const cssVars64 = $page.url?.href?.split('css=')?.[1]?.split('&')[0];

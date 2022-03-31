@@ -10,6 +10,8 @@
 		repo_name = $page.url?.href?.split('repo_name=')?.[1]?.split('&')[0];
 		if (!repo_name && name) {
 			repo_name = '@htmlbricks/' + name;
+		} else if (name && repo_name) {
+			repo_name = repo_name + '/' + name;
 		}
 		pageName.set(name || repo_name?.split('/')?.[1] || repo_name || 'doc');
 

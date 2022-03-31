@@ -7,15 +7,13 @@
 	// export let storybookargs: any;
 	// export let args: any;
 	let loading = true;
-	let content;
+	let content: string;
+	export let repo_name: string;
 	async function fetchInfo() {
 		loading = true;
 		try {
 			const pageraw = await fetch(
-				`https://cdn.jsdelivr.net/gh/dottgonzo/bootstrap-webcomponents-monorepo@${$debugVersion}/packages/${$pageName.replace(
-					'hb-',
-					''
-				)}/README.md`
+				`https://cdn.jsdelivr.net/npm/${repo_name}@${$debugVersion}/README.md`
 			);
 			const txt = await pageraw.text();
 			const md = new MarkdownIt();

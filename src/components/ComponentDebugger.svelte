@@ -214,7 +214,7 @@
 								? encodeURIComponent(
 										JSON.stringify($htmlSlotsContents.filter((f) => f.component === meta.name))
 								  )
-								: ''}&css={allCssVars.length
+								: ''}&repo_name={meta.repoName.split('/')[0]}&css={allCssVars.length
 								? encodeURIComponent(JSON.stringify(allCssVars))
 								: ''}&component={meta.name}&params={encodeURIComponent(
 								JSON.stringify(args)
@@ -342,7 +342,7 @@
 								bind:args
 							/>
 						{:else if controlTab === 'info'}
-							<InfoTable />
+							<InfoTable repo_name={meta?.repoName} />
 						{:else if controlTab === 'install'}
 							<InstallTable {com} cdn={cdnUri} />
 						{:else if controlTab === 'schemes'}
