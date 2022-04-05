@@ -1,4 +1,5 @@
 - add desription to manifest
+- add dependencies to manifest
 - move from /release folder to / on npm
 - write smarter build/compilation scripts/tools
 - fix form
