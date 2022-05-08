@@ -178,7 +178,7 @@
 
 <div class="container-fluid">
 	{#if meta && args}
-		<div style="margin-top:40px; padding-right:0px" class="row">
+		<div style="margin-top:40px; padding:0px" class="row">
 			<div class="col-7">
 				<div>
 					<h3 style="text-align:center">
@@ -225,7 +225,7 @@
 					</div>
 				</div>
 			</div>
-			<div style="padding-right:0px" class="col-5">
+			<div style="padding:0px" class="col-5">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
 						<button
