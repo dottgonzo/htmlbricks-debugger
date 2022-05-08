@@ -7,42 +7,27 @@
 	function updateSlot(name: string, val: string) {
 		if (val && val.length) {
 			const newContent: HtmlSlotsContent = {
-				component: $pageName.replace('hb-', ''),
+				component: $pageName,
 				content: val,
 				name: name
 			};
 			if (!$htmlSlotsContents.length) {
 				htmlSlotsContents.set([newContent]);
-			} else if (
-				!$htmlSlotsContents.find(
-					(f) => f.component === $pageName.replace('hb-', '') && f.name === name
-				)
-			) {
+				console.log('newContent', newContent);
+			} else if (!$htmlSlotsContents.find((f) => f.component === $pageName && f.name === name)) {
 				const previous = $htmlSlotsContents;
 
 				previous.push(newContent);
 				htmlSlotsContents.set(previous);
-			} else if (
-				$htmlSlotsContents.find(
-					(f) => f.component === $pageName.replace('hb-', '') && f.name === name
-				)
-			) {
+			} else if ($htmlSlotsContents.find((f) => f.component === $pageName && f.name === name)) {
 				const previous = $htmlSlotsContents;
-				previous.find(
-					(f) => f.component === $pageName.replace('hb-', '') && f.name === name
-				).content = val;
+				previous.find((f) => f.component === $pageName && f.name === name).content = val;
 
 				htmlSlotsContents.set(previous);
 			}
-		} else if (
-			$htmlSlotsContents.find(
-				(f) => f.component === $pageName.replace('hb-', '') && f.name === name
-			)
-		) {
+		} else if ($htmlSlotsContents.find((f) => f.component === $pageName && f.name === name)) {
 			const previous = $htmlSlotsContents;
-			const toRemove = previous.findIndex(
-				(f) => f.component === $pageName.replace('hb-', '') && f.name === name
-			);
+			const toRemove = previous.findIndex((f) => f.component === $pageName && f.name === name);
 			previous.splice(toRemove, 1);
 			htmlSlotsContents.set(previous);
 		}
@@ -60,15 +45,15 @@
 		<tr>
 			<td>{s.name}</td>
 			<td>
-				<hb-input-text
+				<hb-input-area
 					schemaentry={JSON.stringify({
 						id: $pageName + '_' + s.name,
 						value:
-							$htmlSlotsContents.find(
-								(f) => f.component === $pageName.replace('hb-', '') && f.name === s.name
-							)?.content || ''
+							$htmlSlotsContents.find((f) => f.component === $pageName && f.name === s.name)
+								?.content || ''
 					})}
 					on:setValue={(e) => {
+						console.log('up slot', e.detail.value);
 						updateSlot(s.name, e.detail.value);
 					}}
 				/>
