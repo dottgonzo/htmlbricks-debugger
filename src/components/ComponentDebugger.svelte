@@ -206,7 +206,7 @@
 					</h3>
 					<div style="padding:10px;border:1px solid yellow;margin-top:20px">
 						<iframe
-							style="width:100%;height:600px"
+							style="width:100%;height:450px"
 							title="component"
 							src="/playgrounds/sandbox?slots={$htmlSlotsContents.filter(
 								(f) => f.component === meta.name
@@ -333,7 +333,7 @@
 						</button>
 					</li>
 				</ul>
-				<div style="border-left: 1px solid #dee2e6;min-height:100%;padding:0px 20px 0px 20px">
+				<div style="border-left: 1px solid #dee2e6;height:500px;padding:0px 20px 0px 20px">
 					<div style="padding-top:20px">
 						{#if controlTab === 'props' && meta?.definitions?.component}
 							<ControlTable

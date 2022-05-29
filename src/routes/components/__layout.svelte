@@ -229,6 +229,7 @@
 {#if navlinks}
 	<hb-layout
 		pagename={$pageName}
+		onescreen={$pageName === 'comparison' ? 'no' : 'yes'}
 		companytitle="fff"
 		companylogouri=""
 		cookielaw=""
