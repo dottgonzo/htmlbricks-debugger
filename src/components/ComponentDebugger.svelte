@@ -333,7 +333,9 @@
 						</button>
 					</li>
 				</ul>
-				<div style="border-left: 1px solid #dee2e6;height:500px;padding:0px 20px 0px 20px">
+				<div
+					style="border-left: 1px solid #dee2e6;height:500px;padding:0px 20px 0px 20px;overflow-y: auto;"
+				>
 					<div style="padding-top:20px">
 						{#if controlTab === 'props' && meta?.definitions?.component}
 							<ControlTable
