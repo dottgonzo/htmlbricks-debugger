@@ -63,6 +63,8 @@
 		}
 	}
 
+	let iframeUri: string;
+
 	$: {
 		if (!componentVersions || componentVersions.repoName !== repo_name) {
 			getComponentVersions(repo_name).catch(console.error);
@@ -151,6 +153,20 @@
 			// 	allCssVars.concat(toAdd);
 			// }
 		}
+		if (meta)
+			iframeUri = `/playgrounds/sandbox?slots=${
+				$htmlSlotsContents.filter((f) => f.component === meta.name)?.length
+					? encodeURIComponent(
+							JSON.stringify($htmlSlotsContents.filter((f) => f.component === meta.name))
+					  )
+					: ''
+			}&repo_name=${meta.repoName.split('/')[0]}&css=${
+				allCssVars.length ? encodeURIComponent(JSON.stringify(allCssVars)) : ''
+			}&component=${meta.name}&params=${encodeURIComponent(
+				JSON.stringify(args)
+			)}&parts=${encodeURIComponent(
+				JSON.stringify($cssPartsContents.filter((f) => f.component === meta.name))
+			)}&version=${$debugVersion}`;
 	}
 	function setVersion(e: { detail: { value: string } }) {
 		if (e?.detail?.value) {
@@ -172,6 +188,15 @@
 					}
 				}
 			}
+		}
+	}
+	function openIframeOnnewWindow() {
+		console.info(`open${iframeUri}`);
+		const popup = window.open(iframeUri);
+		if (popup == null) alert('Please change your popup settings');
+		else {
+			popup.moveTo(0, 0);
+			popup.resizeTo(screen.width, screen.height);
 		}
 	}
 </script>
@@ -203,25 +228,14 @@
 						{:else}
 							{$debugVersion}
 						{/if}
+						<button
+							on:click={() => {
+								openIframeOnnewWindow();
+							}}>open</button
+						>
 					</h3>
 					<div style="padding:10px;border:1px solid yellow;margin-top:20px">
-						<iframe
-							style="width:100%;height:450px"
-							title="component"
-							src="/playgrounds/sandbox?slots={$htmlSlotsContents.filter(
-								(f) => f.component === meta.name
-							)?.length
-								? encodeURIComponent(
-										JSON.stringify($htmlSlotsContents.filter((f) => f.component === meta.name))
-								  )
-								: ''}&repo_name={meta.repoName.split('/')[0]}&css={allCssVars.length
-								? encodeURIComponent(JSON.stringify(allCssVars))
-								: ''}&component={meta.name}&params={encodeURIComponent(
-								JSON.stringify(args)
-							)}&parts={encodeURIComponent(
-								JSON.stringify($cssPartsContents.filter((f) => f.component === meta.name))
-							)}&version={$debugVersion}"
-						/>
+						<iframe style="width:100%;height:450px" title="component" src={iframeUri} />
 					</div>
 				</div>
 			</div>
