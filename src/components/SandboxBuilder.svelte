@@ -36,6 +36,6 @@
 	});
 </script>
 
-<div style="border:1px solid yellow">
+<div style="border:1px solid blueviolet">
 	{@html com}
 </div>

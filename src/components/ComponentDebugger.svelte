@@ -191,7 +191,6 @@
 		}
 	}
 	function openIframeOnnewWindow() {
-		console.info(`open${iframeUri}`);
 		const popup = window.open(iframeUri);
 		if (popup == null) alert('Please change your popup settings');
 		else {
@@ -206,35 +205,40 @@
 		<div style="margin-top:40px; padding:0px" class="row">
 			<div class="col-7">
 				<div>
-					<h3 style="text-align:center">
-						{meta.name} version
-						{#if componentVersions?.versions?.length && Array.isArray(componentVersions.versions)}
-							<hb-input-select
-								style="width:150px;display:inline-block;"
-								schemaentry={JSON.stringify({
-									id: 'selectversion',
-									params: {
-										options: componentVersions?.versions.map((m) => {
-											return {
-												value: m,
-												label: m + (m === $componentsVersion ? ' (current)' : '')
-											};
-										})
-									},
-									value: $debugVersion
-								})}
-								on:setValue={setVersion}
-							/>
-						{:else}
-							{$debugVersion}
-						{/if}
-						<button
-							on:click={() => {
-								openIframeOnnewWindow();
-							}}>open</button
-						>
-					</h3>
-					<div style="padding:10px;border:1px solid yellow;margin-top:20px">
+					<div style="width:100%;text-align:center">
+						<h3 style="display: flex;flex-flow: wrap;width: 420px;  margin: auto;">
+							{meta.name}
+							<span style="margin:auto 0.8em auto 0.8em">
+								{#if componentVersions?.versions?.length && Array.isArray(componentVersions.versions)}
+									<hb-input-select
+										style="width:150px;display:inline-block;"
+										schemaentry={JSON.stringify({
+											id: 'selectversion',
+											params: {
+												options: componentVersions?.versions.map((m) => {
+													return {
+														value: m,
+														label: m + (m === $componentsVersion ? ' (current)' : '')
+													};
+												})
+											},
+											value: $debugVersion
+										})}
+										on:setValue={setVersion}
+									/>
+								{:else}
+									{$debugVersion}
+								{/if}
+							</span>
+							<button
+								class="btn btn-outline-dark btn-sm"
+								on:click={() => {
+									openIframeOnnewWindow();
+								}}><i class="bi bi-window-fullscreen" /></button
+							>
+						</h3>
+					</div>
+					<div style="border:1px solid yellow;margin-top:20px">
 						<iframe style="width:100%;height:450px" title="component" src={iframeUri} />
 					</div>
 				</div>
