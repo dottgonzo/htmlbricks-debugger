@@ -86,5 +86,5 @@
 		</table>
 	</div>
 {:else}
-	loading
+	loading comparison
 {/if}

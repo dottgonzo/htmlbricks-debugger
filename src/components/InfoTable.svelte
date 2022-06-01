@@ -33,5 +33,5 @@
 {#if !loading}
 	{@html content}
 {:else}
-	loading
+	loading info
 {/if}

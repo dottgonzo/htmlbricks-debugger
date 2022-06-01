@@ -8,7 +8,7 @@
 	// export let args: any;
 	let content;
 	async function fetchInfo() {
-		content = 'loading';
+		content = 'loading readme...';
 		try {
 			const pageraw = await fetch(
 				`https://cdn.jsdelivr.net/gh/dottgonzo/bootstrap-webcomponents-monorepo@${$componentsVersion}/README.md`

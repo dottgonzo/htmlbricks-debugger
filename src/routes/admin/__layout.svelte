@@ -112,6 +112,9 @@
 					catIcon = 'puzzle';
 					break;
 
+				case 'dashboard':
+					catIcon = 'dashboard';
+					break;
 				case 'dev':
 					catIcon = 'code';
 					break;
@@ -220,6 +223,7 @@
 {#if navlinks}
 	<hb-layout
 		pagename={$pageName}
+		page_title={$pageName}
 		companytitle="fff"
 		companylogouri=""
 		cookielaw=""

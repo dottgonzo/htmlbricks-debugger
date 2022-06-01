@@ -36,6 +36,7 @@
 				`https://cdn.jsdelivr.net/npm/${repoName}@${version}/release/manifest.json`
 			);
 			meta = await pageraw.json();
+			console.log('meta ok');
 		} catch (err) {
 			console.warn(`failed to fetch manifest for ${repoName}`);
 		}
@@ -82,7 +83,7 @@
 		// i18nLangs = meta?.i18n;
 		if (meta) {
 			args = meta.examples[0];
-
+			console.log(args, 'args', meta);
 			com = '';
 			if ($cssPartsContents.filter((f) => f.component === meta.name)?.length) {
 				com += '<sty' + 'le>';
@@ -234,7 +235,7 @@
 								class="btn btn-outline-dark btn-sm"
 								on:click={() => {
 									openIframeOnnewWindow();
-								}}><i class="bi bi-window-fullscreen" /></button
+								}}><i class="bi bi-arrow-up-right-square" /></button
 							>
 						</h3>
 					</div>
@@ -395,7 +396,7 @@
 			</div>
 		</div>
 	{:else}
-		loading
+		loading debugger
 	{/if}
 </div>
 
