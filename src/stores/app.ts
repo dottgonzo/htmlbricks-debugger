@@ -7,7 +7,7 @@ export type allComponentsList = {
 };
 
 export const pageName: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.11.17');
+export const componentsVersion: Readable<string> = readable('0.11.20');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
