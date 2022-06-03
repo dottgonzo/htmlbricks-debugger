@@ -4,6 +4,7 @@
 	import { addComponent, LanguageTranslator } from '@htmlbricks/hb-jsutils';
 	import { onMount } from 'svelte';
 	import { pageName, componentsVersion, lang, componentsList } from '../../stores/app';
+	import { getNavlinks } from '../../utils/util';
 
 	// import {
 	// 	globalBootstrapThemeCssVars,
@@ -17,171 +18,14 @@
 	// 	bootstrapThemeCssVars.set($defaultootstrapThemeCssVars);
 	// }
 	let navlinks: INavLink[];
-	async function fetchComponentsList(version: string) {
-		try {
-			const pageraw = await fetch(
-				`https://cdn.jsdelivr.net/npm/@htmlbricks/hb-bundle@${version}/release/list.json`
-			);
-			const meta = await pageraw.json();
-			componentsList.set(meta);
-		} catch (err) {
-			console.warn(`failed to fetch list`, err);
-		}
-	}
-	const getNavlinks = async (): Promise<void> => {
-		const home: INavLink = {
-			key: 'main',
-			label: 'home',
-			group: '',
-			active: false,
-			icon: 'house-door'
-		};
-
-		const storybook: INavLink = {
-			key: 'storybook',
-			label: 'storybook',
-			group: '',
-			active: false,
-			icon: 'grid-3x3-gap'
-		};
-		const github: INavLink = {
-			key: 'github',
-			label: 'github',
-			group: '',
-			active: false,
-			icon: 'github'
-		};
-		const documentation: INavLink = {
-			key: 'documentation',
-			label: 'documentation',
-			group: 'Docs',
-			active: false,
-			icon: 'book',
-			subLinks: [
-				{
-					key: 'quick',
-					label: 'Quick Start',
-					group: 'Docs',
-					active: false,
-					icon: 'lightning'
-				},
-				{
-					key: 'comparison',
-					label: 'Comparison',
-					group: 'Docs',
-					active: false,
-					icon: 'symmetry-vertical'
-				},
-				{
-					key: 'readme',
-					label: 'Readme',
-					group: 'Docs',
-					active: false,
-					icon: 'book-half'
-				}
-			]
-		};
-		const settings: INavLink = {
-			key: 'settings',
-			label: 'settings',
-			group: 'settings',
-			active: false,
-			icon: 'gear',
-			subLinks: [
-				{
-					key: 'theme',
-					label: 'Theme',
-					group: 'theme',
-					active: false,
-					icon: 'palette'
-				}
-			]
-		};
-		const arr: INavLink[] = [home, documentation, storybook, github];
-		let cats: string[] = [];
-		await fetchComponentsList($componentsVersion);
-		if ($componentsList?.packages)
-			$componentsList.packages.forEach((f) => {
-				if (!cats.includes(f.category)) cats.push(f.category);
-			});
-
-		cats.forEach((f) => {
-			let catIcon;
-			switch (f) {
-				case 'basic':
-					catIcon = 'puzzle';
-					break;
-
-				case 'dashboard':
-					catIcon = 'dashboard';
-					break;
-				case 'dev':
-					catIcon = 'code';
-					break;
-				case 'layout':
-					catIcon = 'grid-1x2';
-					break;
-				case 'form':
-					catIcon = 'input-cursor-text';
-
-					break;
-				case 'payment':
-					catIcon = 'credit-card';
-
-					break;
-				case 'editor':
-					catIcon = 'pencil-square';
-
-					break;
-				case 'input':
-					catIcon = 'input-cursor-text';
-
-					break;
-				case 'graph':
-					catIcon = 'graph-up';
-
-					break;
-				case 'components':
-					catIcon = 'motherboard';
-
-					break;
-				case 'page':
-					catIcon = 'window-fullscreen';
-
-					break;
-				case 'table':
-					catIcon = 'table';
-
-					break;
-			}
-
-			const subLinks: INavLink[] = $componentsList.packages
-				.filter((fi) => fi.category === f)
-				.map((m) => {
-					const navLink: INavLink = {
-						key: m.name,
-						label: m.name.replace('hb-', ''),
-						active: false
-					};
-					return navLink;
-				});
-
-			const navLink: INavLink = {
-				key: f,
-				label: f,
-				group: 'Components',
-				subLinks,
-				active: false,
-				icon: catIcon
-			};
-			arr.push(navLink);
-		});
-		arr.push(settings);
-
-		navlinks = arr;
-	};
 	$: {
-		if (!navlinks && $componentsVersion) getNavlinks().catch(console.error);
+		if (!navlinks && $componentsVersion)
+			getNavlinks($componentsVersion, $componentsList)
+				.then((opts) => {
+					navlinks = opts.navLinks;
+					componentsList.set(opts.cList);
+				})
+				.catch(console.error);
 	}
 	onMount(() => {
 		addComponent({ repoName: '@htmlbricks/hb-bundle', version: $componentsVersion });

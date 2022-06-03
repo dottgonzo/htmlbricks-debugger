@@ -19,7 +19,7 @@
 			const meta = await pageraw.json();
 			return meta;
 		} catch (err) {
-			console.warn(`failed to fetch manifest for ${$pageName}`);
+			console.warn(`failed to fetch manifest for ${$pageName} - info`);
 		}
 	}
 
@@ -35,7 +35,7 @@
 			metas = { packages: allProms, version: version };
 			console.log('loaded');
 		} catch (err) {
-			console.warn(`failed to fetch manifest for ${$pageName}`);
+			console.warn(`failed to fetch manifest for ${$pageName} - fetchAll`);
 		}
 	}
 	fetchAll($componentsVersion).catch(console.error);
