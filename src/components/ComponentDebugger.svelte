@@ -208,7 +208,6 @@
 				<div>
 					<div style="width:100%;text-align:center">
 						<h3 style="display: flex;flex-flow: wrap;width: 420px;  margin: auto;">
-							{meta.name}
 							<span style="margin:auto 0.8em auto 0.8em">
 								{#if componentVersions?.versions?.length && Array.isArray(componentVersions.versions)}
 									<hb-input-select
