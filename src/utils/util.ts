@@ -7,7 +7,7 @@ export function getBootstrapCategoryIcon(categoryName: string) {
 			return 'puzzle';
 
 		case 'dashboard':
-			return 'dashboard';
+			return 'speedometer';
 
 		case 'site':
 			return 'globe';
