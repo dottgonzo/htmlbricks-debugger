@@ -37,8 +37,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@htmlbricks/hb-jsutils": "^0.11.11",
-		"@htmlbricks/hb-sidenav-link": "^0.11.11",
+		"@htmlbricks/hb-jsutils": "^0.12.3",
+		"@htmlbricks/hb-sidenav-link": "^0.12.3",
 		"bootstrap": "^5.1.3",
 		"compare-versions": "^4.1.3",
 		"dayjs": "^1.11.2",

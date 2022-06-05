@@ -51,7 +51,7 @@
 				.filter(
 					(f) =>
 						compareVersions.validate(f) &&
-						(!repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.9.21', '>='))
+						(!repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.12.3', '>='))
 				)
 				.sort((a, b) => (compareVersions.compare(a, b, '<') ? 1 : -1));
 
@@ -82,7 +82,7 @@
 
 		// i18nLangs = meta?.i18n;
 		if (meta) {
-			args = meta.examples[0];
+			args = meta.examples?.[0]?.data;
 			console.log(args, 'args', meta);
 			com = '';
 			if ($cssPartsContents.filter((f) => f.component === meta.name)?.length) {
