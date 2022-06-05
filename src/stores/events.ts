@@ -1,8 +1,18 @@
 import { writable, type Writable } from 'svelte/store';
 
-export type HtmlSlotsContent = { component: string; name: string; content: string };
-export type CssPartsContent = { component: string; name: string; content: string };
-export type CssVarsValue = { component: string; name: string; value: string };
+export type HtmlSlotsContent = {
+	component: string;
+	example_id: string;
+	name: string;
+	content: string;
+};
+export type CssPartsContent = {
+	component: string;
+	example_id: string;
+	name: string;
+	content: string;
+};
+export type CssVarsValue = { component: string; example_id: string; name: string; value: string };
 export type GlobalCssVarsValue = { name: string; value: string };
 
 export type ComponentEvent = {
@@ -12,6 +22,7 @@ export type ComponentEvent = {
 	unixtime: number;
 	_id: string;
 	seq: number;
+	example_id: string;
 };
 
 export const events: Writable<ComponentEvent[]> = writable([]);

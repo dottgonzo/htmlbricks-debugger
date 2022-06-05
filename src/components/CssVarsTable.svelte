@@ -5,21 +5,26 @@
 	import { cssVarsValues } from '../stores/events';
 
 	export let vars: CssVar[];
+	export let example_id: string;
 
 	function setCssVar(detail, name: string) {
 		let copy = $cssVarsValues;
 		// exclude templates vars just embedded by deault template
-		const existentChange = copy?.find((f) => f.component === $pageName && f.name === name);
+		const existentChange = copy?.find(
+			(f) => f.component === $pageName && f.name === name && f.example_id === example_id
+		);
 		if (detail.value) {
 			if (existentChange && existentChange.value !== detail.value) {
 				existentChange.value = detail.value;
 				cssVarsValues.set(copy);
 			} else if (!existentChange) {
-				copy.push({ name, component: $pageName, value: detail.value });
+				copy.push({ name, component: $pageName, value: detail.value, example_id });
 				cssVarsValues.set(copy);
 			}
 		} else if (!detail.value && existentChange) {
-			const changeIndex = copy.findIndex((f) => f.component === $pageName && f.name === name);
+			const changeIndex = copy.findIndex(
+				(f) => f.component === $pageName && f.name === name && f.example_id === example_id
+			);
 			copy.splice(changeIndex, 1);
 			cssVarsValues.set(copy);
 		}

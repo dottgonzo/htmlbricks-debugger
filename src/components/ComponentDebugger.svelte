@@ -65,6 +65,7 @@
 	}
 
 	let iframeUri: string;
+	let example_id: string;
 
 	$: {
 		if (!componentVersions || componentVersions.repoName !== repo_name) {
@@ -82,12 +83,22 @@
 
 		// i18nLangs = meta?.i18n;
 		if (meta) {
-			args = meta.examples?.[0]?.data;
+			if (meta.examples.length) {
+				if (!example_id) example_id = meta.examples?.[0]?.name;
+
+				args = meta.examples?.find((f) => f.name === example_id)?.data;
+			}
+
 			console.log(args, 'args', meta);
 			com = '';
-			if ($cssPartsContents.filter((f) => f.component === meta.name)?.length) {
+			if (
+				$cssPartsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
+					?.length
+			) {
 				com += '<sty' + 'le>';
-				for (const p of $cssPartsContents.filter((f) => f.component === meta.name)) {
+				for (const p of $cssPartsContents.filter(
+					(f) => f.component === meta.name && f.example_id === example_id
+				)) {
 					com += `${meta.name}::part(${p.name}){${p.content}}`;
 				}
 				com += '</sty' + 'le>';
@@ -126,8 +137,13 @@
 				com += `"`;
 			}
 			com += ` >`;
-			if ($htmlSlotsContents.filter((f) => f.component === meta.name)?.length) {
-				for (const sl of $htmlSlotsContents.filter((f) => f.component === meta.name)) {
+			if (
+				$htmlSlotsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
+					?.length
+			) {
+				for (const sl of $htmlSlotsContents.filter(
+					(f) => f.component === meta.name && f.example_id === example_id
+				)) {
 					com += `<div slot="${sl.name}">${sl.content}</div>`;
 				}
 			}
@@ -142,7 +158,7 @@
 			}@${$debugVersion}/release/release.js"></${'script'}>`;
 
 			allCssVars = $cssVarsValues
-				.filter((f) => f.component === meta.name)
+				.filter((f) => f.component === meta.name && f.example_id === example_id)
 				?.map((m) => {
 					return { name: m.name, value: m.value };
 				});
@@ -156,9 +172,14 @@
 		}
 		if (meta)
 			iframeUri = `/playgrounds/sandbox?slots=${
-				$htmlSlotsContents.filter((f) => f.component === meta.name)?.length
+				$htmlSlotsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
+					?.length
 					? encodeURIComponent(
-							JSON.stringify($htmlSlotsContents.filter((f) => f.component === meta.name))
+							JSON.stringify(
+								$htmlSlotsContents.filter(
+									(f) => f.component === meta.name && f.example_id === example_id
+								)
+							)
 					  )
 					: ''
 			}&repo_name=${meta.repoName.split('/')[0]}&css=${
@@ -166,7 +187,9 @@
 			}&component=${meta.name}&params=${encodeURIComponent(
 				JSON.stringify(args)
 			)}&parts=${encodeURIComponent(
-				JSON.stringify($cssPartsContents.filter((f) => f.component === meta.name))
+				JSON.stringify(
+					$cssPartsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
+				)
 			)}&version=${$debugVersion}`;
 	}
 	function setVersion(e: { detail: { value: string } }) {
@@ -229,6 +252,27 @@
 								{:else}
 									{$debugVersion}
 								{/if}
+							</span>
+							<span>
+								<hb-input-select
+									style="width:150px;display:inline-block;"
+									schemaentry={JSON.stringify({
+										id: 'selectversion',
+										params: {
+											options: meta.examples?.map((m) => {
+												return {
+													value: m.name,
+													label: m.name
+												};
+											})
+										},
+										value: example_id
+									})}
+									on:setValue={(v) => {
+										console.log('setvalu', v, v.detail);
+										example_id = v.detail.value;
+									}}
+								/>
 							</span>
 							<button
 								class="btn btn-outline-dark btn-sm"
@@ -297,12 +341,15 @@
 								? 'active'
 								: ''}"
 							>slots <span
-								style={$htmlSlotsContents?.filter((f) => f.component === meta.name).length
+								style={$htmlSlotsContents?.filter(
+									(f) => f.component === meta.name && f.example_id === example_id
+								).length
 									? 'color:red;'
 									: ''}
 								class="badge bg-secondary"
-								>{$htmlSlotsContents?.filter((f) => f.component === meta.name).length || 0}/{meta
-									.htmlSlots?.length || 0}</span
+								>{$htmlSlotsContents?.filter(
+									(f) => f.component === meta.name && f.example_id === example_id
+								).length || 0}/{meta.htmlSlots?.length || 0}</span
 							></button
 						>
 					</li>
@@ -333,14 +380,16 @@
 								? ''
 								: 'disabled'} {controlTab === 'events' ? 'active' : ''}"
 							>events
-							{#if $events?.filter((f) => f.component === meta.name)?.length && meta?.definitions?.events?.definitions?.Events?.properties && Object.keys(meta.definitions.events.definitions.Events.properties)?.length}
+							{#if $events?.filter((f) => f.component === meta.name && f.example_id === example_id)?.length && meta?.definitions?.events?.definitions?.Events?.properties && Object.keys(meta.definitions.events.definitions.Events.properties)?.length}
 								<span
 									class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
 								>
-									{#if !$events?.filter((f) => f.component === meta.name)?.length}
+									{#if !$events?.filter((f) => f.component === meta.name && f.example_id === example_id)?.length}
 										0
-									{:else if $events?.filter((f) => f.component === meta.name)?.length < 100}
-										{$events?.filter((f) => f.component === meta.name)?.length?.toString()}
+									{:else if $events?.filter((f) => f.component === meta.name && f.example_id === example_id)?.length < 100}
+										{$events
+											?.filter((f) => f.component === meta.name && f.example_id === example_id)
+											?.length?.toString()}
 									{:else}
 										99+
 									{/if}
@@ -372,20 +421,20 @@
 							/>
 							<AllSchemeTable definition={meta.definitions.component} />
 						{:else if controlTab === 'events'}
-							<EventsTable definition={meta.definitions.events} />
+							<EventsTable definition={meta.definitions.events} {example_id} />
 						{:else if controlTab === 'i18n'}
 							<I18nTable {meta} bind:args />
 						{:else if controlTab === 'slots'}
-							<SlotTable slots={meta.htmlSlots} />
+							<SlotTable slots={meta.htmlSlots} {example_id} />
 						{:else if controlTab === 'style'}
 							{#if meta.styleSetup?.parts?.length}
 								<div>
-									<CssPartsTable parts={meta.styleSetup.parts} />
+									<CssPartsTable parts={meta.styleSetup.parts} {example_id} />
 								</div>
 							{/if}
 							{#if meta.styleSetup?.vars?.length}
 								<div>
-									<CssVarsTable vars={meta.styleSetup.vars} />
+									<CssVarsTable vars={meta.styleSetup.vars} {example_id} />
 								</div>
 							{/if}
 						{/if}
