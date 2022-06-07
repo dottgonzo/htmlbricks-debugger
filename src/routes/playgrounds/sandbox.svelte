@@ -12,6 +12,7 @@
 	let com: string;
 	let meta;
 	let lastLoadId = 'none';
+	let id: string;
 
 	async function loadMeta(name: string, version: string) {
 		meta = null;
@@ -30,6 +31,7 @@
 		name = $page.url?.href?.split('component=')?.[1]?.split('&')[0];
 		version = $page.url?.href?.split('version=')?.[1]?.split('&')[0];
 		repo_name = $page.url?.href?.split('repo_name=')?.[1]?.split('&')[0];
+		id = $page.url?.href?.split('id=')?.[1]?.split('&')?.[0] || '';
 		const paramsBase64 = $page.url?.href?.split('params=')?.[1]?.split('&')[0];
 		const htmlSlot64 = $page.url?.href?.split('slots=')?.[1]?.split('&')[0];
 		const cssVars64 = $page.url?.href?.split('css=')?.[1]?.split('&')[0];
@@ -102,5 +104,5 @@
 </script>
 
 {#if meta}
-	<SandboxBuilder {meta} {name} {version} {com} />
+	<SandboxBuilder {meta} {name} {version} {com} example_id={id} />
 {/if}

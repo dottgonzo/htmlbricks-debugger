@@ -7,6 +7,7 @@
 	export let version: string;
 	export let meta: ComponentSetup;
 	export let com: string;
+	export let example_id: string;
 
 	onMount(() => {
 		if (name && version && meta?.repoName)
@@ -26,7 +27,8 @@
 						data: e.detail,
 						_id: unixtime + '_' + items.length,
 						unixtime,
-						seq: items?.[0]?.seq ? items[0].seq + 1 : 1
+						seq: items?.[0]?.seq ? items[0].seq + 1 : 1,
+						example_id: example_id
 					});
 					items = items.sort((a, b) => b.seq - a.seq);
 					localStorage.setItem('componentsEvents', JSON.stringify(items));

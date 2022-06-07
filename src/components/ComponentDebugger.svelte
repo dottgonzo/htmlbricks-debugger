@@ -190,7 +190,7 @@
 				JSON.stringify(
 					$cssPartsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
 				)
-			)}&version=${$debugVersion}`;
+			)}&version=${$debugVersion}&id=${example_id}`;
 	}
 	function setVersion(e: { detail: { value: string } }) {
 		if (e?.detail?.value) {

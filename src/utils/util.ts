@@ -11,7 +11,8 @@ export function getBootstrapCategoryIcon(categoryName: string) {
 
 		case 'site':
 			return 'globe';
-
+		case 'utils':
+			return 'tools';
 		case 'dev':
 			return 'code';
 
