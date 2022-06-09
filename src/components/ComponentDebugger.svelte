@@ -67,6 +67,8 @@
 	let iframeUri: string;
 	let example_id: string;
 
+	function metaLoaded() {}
+
 	$: {
 		if (!componentVersions || componentVersions.repoName !== repo_name) {
 			getComponentVersions(repo_name).catch(console.error);
@@ -84,7 +86,7 @@
 		// i18nLangs = meta?.i18n;
 		if (meta) {
 			if (meta.examples.length) {
-				if (!example_id) example_id = meta.examples?.[0]?.name;
+				if (!example_id || !args) example_id = meta.examples?.[0]?.name;
 
 				args = meta.examples?.find((f) => f.name === example_id)?.data;
 			}
@@ -169,8 +171,6 @@
 
 			// 	allCssVars.concat(toAdd);
 			// }
-		}
-		if (meta)
 			iframeUri = `/playgrounds/sandbox?slots=${
 				$htmlSlotsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
 					?.length
@@ -191,6 +191,7 @@
 					$cssPartsContents.filter((f) => f.component === meta.name && f.example_id === example_id)
 				)
 			)}&version=${$debugVersion}&id=${example_id}`;
+		}
 	}
 	function setVersion(e: { detail: { value: string } }) {
 		if (e?.detail?.value) {
