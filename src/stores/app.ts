@@ -13,6 +13,7 @@ export const debugVersion: Writable<string> = writable(null);
 // export const rootRepo: Writable<string> = writable(null);
 
 export const homePage: Readable<string> = readable('/components/comparison');
+export const siteUrl: Readable<string> = readable('https://demo.freewebcomponents.com');
 
 export const lang: Writable<string> = writable('');
 

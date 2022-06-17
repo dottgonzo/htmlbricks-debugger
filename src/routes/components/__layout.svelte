@@ -3,7 +3,7 @@
 	import type { INavLink } from '@htmlbricks/hb-sidenav-link/release/webcomponent.type';
 	import { addComponent, LanguageTranslator } from '@htmlbricks/hb-jsutils';
 	import { onMount } from 'svelte';
-	import { pageName, componentsVersion, lang, componentsList } from '../../stores/app';
+	import { pageName, componentsVersion, lang, componentsList, siteUrl } from '../../stores/app';
 	import { events } from '../../stores/events';
 	import { getNavlinks } from '../../utils/util';
 
@@ -88,12 +88,12 @@
 			{
 				label: 'Privacy Policy',
 				key: 'privacypolicy',
-				link: 'http://localhost:3000/components/privacy'
+				link: `${$siteUrl}/components/privacy`
 			},
 			{
-				label: 'Cookie Policy',
-				key: 'cookiepolicy',
-				link: 'http://localhost:3000/components/cookielaw'
+				label: 'Cookie Law',
+				key: 'cookielaw',
+				link: `${$siteUrl}/components/cookielaw`
 			}
 		])}
 		company={JSON.stringify({
