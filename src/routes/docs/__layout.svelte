@@ -77,13 +77,12 @@
 </svelte:head>
 {#if navlinks}
 	<hb-layout
+		noburger="yes"
 		pagename={$pageName}
 		page_title={$pageName}
-		onescreen={$pageName === 'comparison' ? 'no' : 'yes'}
 		companytitle="fff"
 		companylogouri=""
 		cookielaw=""
-		navlinks={JSON.stringify(navlinks)}
 		policies={JSON.stringify([
 			{
 				label: 'Privacy Policy',
