@@ -24,6 +24,8 @@ export function getBootstrapCategoryIcon(categoryName: string) {
 
 		case 'payment':
 			return 'credit-card';
+		case 'docs':
+			return 'file-earmark-text';
 
 		case 'editor':
 			return 'pencil-square';

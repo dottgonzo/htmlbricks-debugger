@@ -84,6 +84,18 @@
 		companylogouri=""
 		cookielaw=""
 		navlinks={JSON.stringify(navlinks)}
+		policies={JSON.stringify([
+			{
+				label: 'Privacy Policy',
+				key: 'privacypolicy',
+				link: 'http://localhost:3000/components/privacy'
+			},
+			{
+				label: 'Cookie Policy',
+				key: 'cookiepolicy',
+				link: 'http://localhost:3000/components/cookielaw'
+			}
+		])}
 		company={JSON.stringify({
 			logoUri: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg',
 			siteName: 'tttttt',

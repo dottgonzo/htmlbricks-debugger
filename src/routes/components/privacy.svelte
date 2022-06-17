@@ -1,0 +1,23 @@
+<script lang="ts">
+	import { pageName } from '../../stores/app';
+	pageName.set('privacypolicy');
+</script>
+
+<div class="container">
+	<hb-terms-doc-templates
+		id="com-hb-terms-doc-templates"
+		data={JSON.stringify({
+			collectedData: { dataTypes: [], scopes: [] },
+			id: 'privacy-doc-italian',
+			site: {
+				name: 'demo.freewebcomponents.com',
+				url: 'https://demo.freewebcomponents.com',
+				privacyPolicyUri: 'https://demo.freewebcomponents.com/privacy_policy',
+				cookiePolicyUri: 'https://demo.freewebcomponents.com/cookie_law'
+			},
+			company: { name: 'FWC Inc.', address: 'Acacia Avenue, 666' },
+			privacyAdmin: { name: 'testownerprivacy', email: 'ownprivacy.own' },
+			date: '2020-01-01T00:00:00.000Z'
+		})}
+	/>
+</div>
