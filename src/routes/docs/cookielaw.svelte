@@ -15,7 +15,7 @@
 				privacyPolicyUri: 'https://demo.freewebcomponents.com/privacy_policy',
 				cookiePolicyUri: 'https://demo.freewebcomponents.com/cookie_law'
 			},
-			company: { name: 'FWC Inc.', address: 'Acacia Avenue, 666' },
+			company: { name: 'INGECO S.R.L.', address: 'Piazza Cavour 33, Catania' },
 			date: '2020-01-01T00:00:00.000Z',
 			cookies: [
 				{

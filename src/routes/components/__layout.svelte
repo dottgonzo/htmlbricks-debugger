@@ -77,6 +77,9 @@
 </svelte:head>
 {#if navlinks}
 	<hb-layout
+		on:navbarSlotClick={(e) => {
+			goto('/');
+		}}
 		pagename={$pageName}
 		page_title={$pageName}
 		onescreen={$pageName === 'comparison' ? 'no' : 'yes'}
@@ -97,16 +100,15 @@
 			}
 		])}
 		company={JSON.stringify({
-			logoUri: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg',
-			siteName: 'tttttt',
-			companyName: 'testcompany S.R.L.',
-			registration: 'copyright',
-			description: `testo e descrizione di esempio dell applicazione`,
-			vatNumber: 'aa - ffffff',
-			fiscalCode: 'f4f5f6fff'
+			logoUri: '/monochromelogoonly_512.png',
+			siteName: 'freewebcomponents.com',
+			companyName: 'INGECO S.R.L.',
+			registration: '2022 dev',
+			description: `freewebcomponents.com - Free Web Components - HTML Bricks`,
+			vatNumber: 'aa - ffffff'
 		})}
 		sidebar={JSON.stringify({
-			logo: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Wikipedia-logo-v2.svg',
+			logo: '/monochromelogoonly_512.png',
 			title: 'HtmlB',
 			type: 'autohide'
 		})}
