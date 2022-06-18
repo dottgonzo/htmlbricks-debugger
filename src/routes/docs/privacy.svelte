@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { pageName } from '../../stores/app';
+	import { pageName, pageTitle } from '../../stores/app';
 	pageName.set('privacypolicy');
+	pageTitle.set('privacy policy');
 </script>
 
 <div class="container">

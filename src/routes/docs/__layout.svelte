@@ -3,7 +3,14 @@
 	import type { INavLink } from '@htmlbricks/hb-sidenav-link/release/webcomponent.type';
 	import { addComponent, LanguageTranslator } from '@htmlbricks/hb-jsutils';
 	import { onMount } from 'svelte';
-	import { pageName, componentsVersion, lang, componentsList, siteUrl } from '../../stores/app';
+	import {
+		pageName,
+		componentsVersion,
+		lang,
+		componentsList,
+		siteUrl,
+		pageTitle
+	} from '../../stores/app';
 	import { events } from '../../stores/events';
 	import { getNavlinks } from '../../utils/util';
 
@@ -79,7 +86,7 @@
 	<hb-layout
 		noburger="yes"
 		pagename={$pageName}
-		page_title={$pageName}
+		page_title={$pageTitle}
 		companytitle="fff"
 		companylogouri=""
 		cookielaw=""
