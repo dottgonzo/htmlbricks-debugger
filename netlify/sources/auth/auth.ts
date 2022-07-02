@@ -3,7 +3,7 @@ import router from 'mongo-passport-auth-lib/serversingle'
 const app = router({
     "mongoUri": "mongodb+srv://htmlbricks:v2HVRb4UiCgf2bre@cluster0.ksoyj.mongodb.net/htmlbricks?retryWrites=true&w=majority",
     "authPath": "/.netlify/functions/auth",
-    "jwtSecret": "kgHUHUiipsr853_yeqGuET_9Wt",
+    "jwtSecret": "kgHUHUi;ri8mRTYtr_;r86I67mtWt",
     "local": {},
     "jwt": {
         audience: "htmlbricks",
