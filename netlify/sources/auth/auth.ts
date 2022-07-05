@@ -11,10 +11,10 @@ const app = router({
         expiresIn: 60 * 60 * 24
     }
 })
-const hand = serverless(app);
-export const handler = async (event, context) => {
-    context.callbackWaitsForEmptyEventLoop = false;
-    const result = await hand(event, context);
+const handler = serverless(app);
+module.exports.handler = async (event, context) => {
+    // you can do other things here
+    const result = await handler(event, context);
     // and here
     return result;
 };
