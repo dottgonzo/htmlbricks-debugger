@@ -26,7 +26,7 @@ export const oauth2providers: Readable<{ provider: string, uri: string }[]> = re
 ])
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.15.10');
+export const componentsVersion: Readable<string> = readable('0.15.13');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);

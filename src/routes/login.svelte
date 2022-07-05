@@ -66,6 +66,7 @@
 			oauth2providers={JSON.stringify($oauth2providers)}
 			type="login"
 			logouri="/banner_one_all.png"
+			disablelocal="yes"
 			on:getProviderToken={(e) => {
 				console.log('oauth', e.detail);
 			}}
