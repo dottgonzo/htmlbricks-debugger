@@ -13,7 +13,7 @@ const app = router({
 })
 const hand = serverless(app);
 export const handler = async (event, context) => {
-    // you can do other things here
+    context.callbackWaitsForEmptyEventLoop = false;
     const result = await hand(event, context);
     // and here
     return result;
