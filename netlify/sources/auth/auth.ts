@@ -11,10 +11,9 @@ const app = router({
         expiresIn: 60 * 60 * 24
     }
 })
-const handler = serverless(app);
-module.exports.handler = async (event, context) => {
+export const handler = (event, context) => {
     // you can do other things here
-    const result = await handler(event, context);
+    const result = serverless(app);
     // and here
     return result;
 };
