@@ -3,11 +3,42 @@
 
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { siteUrl, oauth2providers, componentsVersion } from '../stores/app';
+	import { siteUrl, oauth2providers, componentsVersion, authUrl } from '../stores/app';
 	onMount(() => {
 		addComponent({ repoName: '@htmlbricks/hb-layout', version: $componentsVersion });
 		addComponent({ repoName: '@htmlbricks/hb-auth', version: $componentsVersion });
 	});
+	async function authorizeSocialLogin(detail: { token: string; provider: string }) {
+		const url = $authUrl + '/social/login';
+		const response = await fetch(url, {
+			headers: { 'Content-Type': 'application/json' },
+			method: 'POST',
+			body: JSON.stringify(detail)
+		});
+		console.log('server answer with', response);
+		if (response.ok) {
+			const data = await response.json();
+			console.log('server json answer', data);
+		} else {
+			try {
+				const data = await response.json();
+				throw new Error(JSON.stringify(data));
+			} catch (err) {
+				throw err;
+			}
+		}
+	}
+	async function socialLoginOauthAnswer(detail: { token: string; provider: string }) {
+		console.log('auth socialLoginOauthAnswer', detail);
+		try {
+			if (!detail.token) {
+				return console.error('auth socialLoginOauthAnswer: no token');
+			}
+			await authorizeSocialLogin(detail);
+		} catch (err) {
+			console.error('auth socialLoginOauthAnswer:', err);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -67,9 +98,7 @@
 			type="login"
 			logouri="/banner_one_all.png"
 			disablelocal="yes"
-			on:getProviderToken={(e) => {
-				console.log('oauth', e.detail);
-			}}
+			on:getProviderToken={(e) => socialLoginOauthAnswer(e.detail).catch((c) => console.error(c))}
 		/>
 	</div>
 </hb-layout>
