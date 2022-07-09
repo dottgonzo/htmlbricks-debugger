@@ -28,13 +28,24 @@
 			}
 		}
 	}
-	async function socialLoginOauthAnswer(detail: { token: string; provider: string }) {
+	async function socialLoginOauthAnswer(detail: {
+		token?: string;
+		provider: string;
+		tmpCode?: string;
+	}) {
 		console.log('auth socialLoginOauthAnswer', detail);
 		try {
-			if (!detail.token) {
+			const payload = {
+				provider: detail.provider,
+				token: detail.token || detail.tmpCode
+			};
+			if (!payload.token) {
 				return console.error('auth socialLoginOauthAnswer: no token');
 			}
-			await authorizeSocialLogin(detail);
+			if (!payload.provider) {
+				return console.error('auth socialLoginOauthAnswer: no provider');
+			}
+			await authorizeSocialLogin(payload);
 		} catch (err) {
 			console.error('auth socialLoginOauthAnswer:', err);
 		}
