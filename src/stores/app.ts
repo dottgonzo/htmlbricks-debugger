@@ -5,6 +5,8 @@ export type allComponentsList = {
 	packages: ComponentShortSetup[];
 	version: string;
 };
+const githubClientId = 'a355c8b84da0daf4b701'
+
 const googleClientId = '737686426982-4b7qenmb8jl7rf1j4jp649gai7t3jh00.apps.googleusercontent.com'
 const googleScope = 'https%3A//www.googleapis.com/auth/userinfo.email'
 const productionFontendUrl = 'https://demo.freewebcomponents.com'
@@ -17,8 +19,8 @@ export const oauth2providers: Readable<{ provider: string, uri: string }[]> = re
 		uri: `https://accounts.google.com/o/oauth2/v2/auth?scope=${googleScope}&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${productionFontendUrl}/login&client_id=${googleClientId}`
 	},
 	{
-		provider: 'facebook',
-		uri: ''
+		provider: 'github',
+		uri: `https://github.com/login/oauth/authorize?scope=user&client_id=${githubClientId}&redirect_uri=${productionFontendUrl}/login?provider=github`
 	},
 	{
 		provider: 'twitter',
@@ -27,7 +29,7 @@ export const oauth2providers: Readable<{ provider: string, uri: string }[]> = re
 ])
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.15.13');
+export const componentsVersion: Readable<string> = readable('0.15.14');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
