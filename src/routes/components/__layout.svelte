@@ -24,7 +24,6 @@
 		if (!navlinks && $componentsVersion)
 			getNavlinks($componentsVersion, $componentsList)
 				.then((opts) => {
-					console.log('opts', opts);
 					navlinks = opts.navLinks;
 					componentsList.set(opts.cList);
 				})

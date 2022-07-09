@@ -22,7 +22,6 @@
 		try {
 			const pageraw = await fetch(uri);
 			meta = await pageraw.json();
-			console.log(meta);
 		} catch (err) {
 			console.warn(`failed to fetch manifest for ${uri}`);
 		}
