@@ -1,2 +1,0 @@
-[functions]
-    external_node_modules = ["mongoose", "express", "mongodb", "require_optional"]
