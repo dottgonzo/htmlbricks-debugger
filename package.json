@@ -4,7 +4,6 @@
 	"scripts": {
 		"dev": "svelte-kit dev --host",
 		"build": "svelte-kit build",
-		"build:all": "npm run build && npm run build:function",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
 		"test": "playwright test",
@@ -14,8 +13,7 @@
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"release:patch": "npm version patch && git push && git push --tags",
 		"release:minor": "npm version minor && git push && git push --tags",
-		"release:major": "npm version major && git push && git push --tags",
-		"build:function": "cd netlify/sources/auth && npm i && zip-it-and-ship-it . ../../functions/"
+		"release:major": "npm version major && git push && git push --tags"
 	},
 	"devDependencies": {
 		"@netlify/zip-it-and-ship-it": "^5.11.1",
