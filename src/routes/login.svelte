@@ -8,12 +8,21 @@
 		addComponent({ repoName: '@htmlbricks/hb-layout', version: $componentsVersion });
 		addComponent({ repoName: '@htmlbricks/hb-auth', version: $componentsVersion });
 	});
-	async function authorizeSocialLogin(detail: { token: string; provider: string }) {
+	async function authorizeSocialLogin(detail: {
+		token: string;
+		provider: string;
+		redirect_uri?: string;
+	}) {
 		const url = $authUrl + '/social/login';
 		const response = await fetch(url, {
 			headers: { 'Content-Type': 'application/json' },
 			method: 'POST',
-			body: JSON.stringify(detail)
+			body: JSON.stringify(
+				Object.assign(
+					{ redirect_uri: detail.redirect_uri || 'https://demo.freewebcomponents.com/login' },
+					detail
+				)
+			)
 		});
 		console.log('server answer with', response);
 		if (response.ok) {
