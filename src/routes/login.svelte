@@ -11,18 +11,13 @@
 	async function authorizeSocialLogin(detail: {
 		token: string;
 		provider: string;
-		redirect_uri?: string;
+		redirect_uri: string;
 	}) {
 		const url = $authUrl + '/social/login';
 		const response = await fetch(url, {
 			headers: { 'Content-Type': 'application/json' },
 			method: 'POST',
-			body: JSON.stringify(
-				Object.assign(
-					{ redirect_uri: detail.redirect_uri || 'https://demo.freewebcomponents.com/login' },
-					detail
-				)
-			)
+			body: JSON.stringify(Object.assign({ redirect_uri: detail.redirect_uri }, detail))
 		});
 		console.log('server answer with', response);
 		if (response.ok) {
@@ -41,19 +36,22 @@
 		token?: string;
 		provider: string;
 		tmpCode?: string;
+		redirect_uri?: string;
 	}) {
 		console.log('auth socialLoginOauthAnswer', detail);
 		try {
+			if (!detail?.provider) {
+				return console.error('auth socialLoginOauthAnswer: no provider');
+			}
 			const payload = {
 				provider: detail.provider,
-				token: detail.token || detail.tmpCode
+				token: detail.token || detail.tmpCode,
+				redirect_uri: detail.redirect_uri || 'https://demo.freewebcomponents.com/login'
 			};
 			if (!payload.token) {
 				return console.error('auth socialLoginOauthAnswer: no token');
 			}
-			if (!payload.provider) {
-				return console.error('auth socialLoginOauthAnswer: no provider');
-			}
+
 			await authorizeSocialLogin(payload);
 		} catch (err) {
 			console.error('auth socialLoginOauthAnswer:', err);
