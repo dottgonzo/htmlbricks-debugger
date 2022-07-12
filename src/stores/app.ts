@@ -12,6 +12,10 @@ const gitlabScope = 'read_user'
 const facebookClientId = '1011321802910911'
 const facebookScope = 'email'
 
+
+const twitterClientId = '7pmt9Ydh9ASiUWqjMa8mOCHz8'
+const twitterScope = 'email'
+
 const googleClientId = '737686426982-4b7qenmb8jl7rf1j4jp649gai7t3jh00.apps.googleusercontent.com'
 const googleScope = 'https%3A//www.googleapis.com/auth/userinfo.email'
 const githubScope = 'user'
@@ -35,11 +39,15 @@ export const oauth2providers: Readable<{ provider: string, uri: string }[]> = re
 	{
 		provider: 'facebook',
 		uri: `https://www.facebook.com/v14.0/dialog/oauth?scope=${facebookScope}&client_id=${facebookClientId}&state=${new Date().valueOf()}&redirect_uri=${productionFontendUrl}/login?provider=facebook`
+	},
+	{
+		provider: 'twitter',
+		uri: `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${twitterClientId}&scope=${twitterScope}&state=state&code_challenge=challenge&code_challenge_method=plain&redirect_uri=${productionFontendUrl}/login?provider=twitter`
 	}
 ])
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.15.21');
+export const componentsVersion: Readable<string> = readable('0.15.22');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
