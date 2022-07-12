@@ -11,7 +11,7 @@ const gitlabScope = 'email'
 
 const googleClientId = '737686426982-4b7qenmb8jl7rf1j4jp649gai7t3jh00.apps.googleusercontent.com'
 const googleScope = 'https%3A//www.googleapis.com/auth/userinfo.email'
-const githubScope = 'user'
+const githubScope = 'read_user'
 const productionFontendUrl = 'https://demo.freewebcomponents.com'
 const developmentFontendUrl = 'http://localhost:3000'
 export const authUrl: Readable<string> = readable('https://fn.freewebcomponents.com/.netlify/functions/auth')
