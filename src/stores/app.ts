@@ -34,7 +34,7 @@ export const oauth2providers: Readable<{ provider: string, uri: string }[]> = re
 	},
 	{
 		provider: 'facebook',
-		uri: `https://facebook.com/www.facebook.com/v14.0/dialog/oauth?scope=${facebookScope}&client_id=${facebookClientId}&state=${new Date().valueOf()}&redirect_uri=${productionFontendUrl}/login?provider=facebook`
+		uri: `https://www.facebook.com/v14.0/dialog/oauth?scope=${facebookScope}&client_id=${facebookClientId}&state=${new Date().valueOf()}&redirect_uri=${productionFontendUrl}/login?provider=facebook`
 	}
 ])
 export const pageName: Writable<string> = writable('');
