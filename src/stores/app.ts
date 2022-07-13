@@ -9,15 +9,15 @@ const githubClientId = 'a355c8b84da0daf4b701'
 const gitlabClientId = 'cf6a29d469aeca70ae50611f01ef0188343707270071ee7f6dc3e030a0009d17'
 const gitlabScope = 'read_user'
 
-const facebookClientId = '1011321802910911'
-const facebookScope = 'email'
+// const facebookClientId = '1011321802910911'
+// const facebookScope = 'email'
 
 
-const twitterClientId = '7pmt9Ydh9ASiUWqjMa8mOCHz8'
-const twitterScope = 'email'
+// const twitterClientId = '7pmt9Ydh9ASiUWqjMa8mOCHz8'
+// const twitterScope = 'email'
 
-const googleClientId = '737686426982-4b7qenmb8jl7rf1j4jp649gai7t3jh00.apps.googleusercontent.com'
-const googleScope = 'https%3A//www.googleapis.com/auth/userinfo.email'
+// const googleClientId = '737686426982-4b7qenmb8jl7rf1j4jp649gai7t3jh00.apps.googleusercontent.com'
+// const googleScope = 'https%3A//www.googleapis.com/auth/userinfo.email'
 const githubScope = 'user'
 const productionFontendUrl = 'https://demo.freewebcomponents.com'
 const developmentFontendUrl = 'http://localhost:3000'
