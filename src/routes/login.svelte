@@ -110,11 +110,11 @@
 		github: { pageUri: 'https://github.com/dottgonzo/bootstrap-webcomponents-monorepo' }
 	})}
 >
-	<div slot="page" style="position: absolute;height: 100%;top: 0px;width: 100%;">
+	<div slot="page" id="page">
 		<hb-auth
 			oauth2providers={JSON.stringify($oauth2providers)}
 			type="login"
-			logouri="/banner_one_all.png"
+			logouri="/logoonly.png"
 			disablelocal="yes"
 			on:getProviderToken={(e) => socialLoginOauthAnswer(e.detail).catch((c) => console.error(c))}
 		/>
@@ -136,5 +136,22 @@
 
 	body {
 		font-family: 'Roboto', sans-serif;
+	}
+
+	#page {
+		position: absolute;
+		height: 100%;
+		top: 0px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+	hb-auth {
+		margin: 0;
+		position: absolute;
+		top: 40%;
+		display: block;
+		-ms-transform: translateY(-50%);
+		transform: translateY(-50%);
 	}
 </style>
