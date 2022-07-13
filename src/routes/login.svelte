@@ -149,7 +149,7 @@
 	hb-auth {
 		margin: 0;
 		position: absolute;
-		top: 40%;
+		top: 45%;
 		display: block;
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
