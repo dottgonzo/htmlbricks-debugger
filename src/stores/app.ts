@@ -23,31 +23,31 @@ const productionFontendUrl = 'https://demo.freewebcomponents.com'
 const developmentFontendUrl = 'http://localhost:3000'
 export const authUrl: Readable<string> = readable('https://fn.freewebcomponents.com/.netlify/functions/auth')
 
-export const oauth2providers: Readable<{ provider: string, uri: string }[]> = readable([
+export const oauth2providers: Readable<{ provider: string, url: string }[]> = readable([
 	// {
 	// 	provider: 'google',
-	// 	uri: `https://accounts.google.com/o/oauth2/v2/auth?scope=${googleScope}&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${productionFontendUrl}/login&client_id=${googleClientId}`
+	// 	url: `https://accounts.google.com/o/oauth2/v2/auth?scope=${googleScope}&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${productionFontendUrl}/login&client_id=${googleClientId}`
 	// },
 	{
 		provider: 'github',
-		uri: `https://github.com/login/oauth/authorize?scope=${githubScope}&client_id=${githubClientId}&redirect_uri=${productionFontendUrl}/login?provider=github`
+		url: `https://github.com/login/oauth/authorize?scope=${githubScope}&client_id=${githubClientId}&redirect_uri=${productionFontendUrl}/login?provider=github`
 	},
 	{
 		provider: 'gitlab',
-		uri: `https://gitlab.com/oauth/authorize?scope=${gitlabScope}&response_type=code&state=${new Date().valueOf()}&client_id=${gitlabClientId}&redirect_uri=${productionFontendUrl}/login?provider=gitlab`
+		url: `https://gitlab.com/oauth/authorize?scope=${gitlabScope}&response_type=code&state=${new Date().valueOf()}&client_id=${gitlabClientId}&redirect_uri=${productionFontendUrl}/login?provider=gitlab`
 	},
 	// {
 	// 	provider: 'facebook',
-	// 	uri: `https://www.facebook.com/v14.0/dialog/oauth?scope=${facebookScope}&client_id=${facebookClientId}&state=${new Date().valueOf()}&redirect_uri=${productionFontendUrl}/login?provider=facebook`
+	// 	url: `https://www.facebook.com/v14.0/dialog/oauth?scope=${facebookScope}&client_id=${facebookClientId}&state=${new Date().valueOf()}&redirect_uri=${productionFontendUrl}/login?provider=facebook`
 	// },
 	// {
 	// 	provider: 'twitter',
-	// 	uri: `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${twitterClientId}&scope=${twitterScope}&state=state&code_challenge=challenge&code_challenge_method=plain&redirect_uri=${productionFontendUrl}/login?provider=twitter`
+	// 	url: `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${twitterClientId}&scope=${twitterScope}&state=state&code_challenge=challenge&code_challenge_method=plain&redirect_uri=${productionFontendUrl}/login?provider=twitter`
 	// }
 ])
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.15.22');
+export const componentsVersion: Readable<string> = readable('0.15.30');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
