@@ -4,6 +4,8 @@
 	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import { siteUrl, oauth2providers, componentsVersion, authUrl } from '../stores/app';
+	import { authCookieName } from '../stores/user';
+
 	onMount(() => {
 		addComponent({ repoName: '@htmlbricks/hb-layout', version: $componentsVersion });
 		addComponent({ repoName: '@htmlbricks/hb-auth', version: $componentsVersion });
@@ -23,7 +25,8 @@
 		if (response.ok) {
 			const data = await response.json();
 
-			localStorage.setItem('_hbtoken', data.token);
+			localStorage.setItem($authCookieName, data.token);
+			console.info('logged');
 		} else {
 			try {
 				const data = await response.json();

@@ -5,6 +5,7 @@
 	import { onMount } from 'svelte';
 	import { pageName, componentsVersion, lang, componentsList } from '../../stores/app';
 	import { getNavlinks } from '../../utils/util';
+	import { token, authCookieName, tokenUri } from '../../stores/user';
 
 	// import {
 	// 	globalBootstrapThemeCssVars,
@@ -27,10 +28,59 @@
 				})
 				.catch(console.error);
 	}
-	onMount(() => {
+
+	onMount(async () => {
 		addComponent({ repoName: '@htmlbricks/hb-bundle', version: $componentsVersion });
 
 		if (!$lang) lang.set(LanguageTranslator.getDefaultLang());
+
+		if (!$token) {
+			let tk: string;
+			let storageType = 'localStorage';
+			tk = localStorage.getItem($authCookieName);
+			if (!tk) {
+				tk = sessionStorage.getItem($authCookieName);
+				storageType = 'sessionStorage';
+			}
+
+			if (tk) {
+				const auth = await fetch($tokenUri, {
+					headers: { Authorization: tk, 'Content-Type': 'application/json' },
+					method: 'POST',
+					body: JSON.stringify({ token: tk })
+				});
+				if (!auth.ok) {
+					console.error('not logged');
+					switch (storageType) {
+						case 'localStorage':
+							localStorage.removeItem($authCookieName);
+							break;
+						case 'sessionStorage':
+							sessionStorage.removeItem($authCookieName);
+							break;
+					}
+					goto(`/login`);
+				} else if (auth.ok) {
+					const decodedAuth = await auth.json();
+					if (decodedAuth.error) {
+						console.error('unauthorized');
+						switch (storageType) {
+							case 'localStorage':
+								localStorage.removeItem($authCookieName);
+								break;
+							case 'sessionStorage':
+								sessionStorage.removeItem($authCookieName);
+								break;
+						}
+						goto(`/login`);
+					} else {
+						token.set(tk);
+					}
+				}
+			} else {
+				goto(`/login`);
+			}
+		}
 	});
 	function pageChange(d) {
 		if (!d.page) return console.error('wrong page', d);
