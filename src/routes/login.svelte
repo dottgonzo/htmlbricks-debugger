@@ -116,7 +116,7 @@
 			type="login"
 			logouri="/logoonly.png"
 			disablelocal="yes"
-			on:getProviderToken={(e) => socialLoginOauthAnswer(e.detail).catch((c) => console.error(c))}
+			on:oauthFlowInit={(e) => socialLoginOauthAnswer(e.detail).catch((c) => console.error(c))}
 		/>
 	</div>
 </hb-layout>
