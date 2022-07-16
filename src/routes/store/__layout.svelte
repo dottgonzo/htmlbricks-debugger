@@ -63,6 +63,7 @@
 						goto(`/login`);
 					} else if (auth.ok) {
 						const decodedAuth = await auth.json();
+						console.log('decoded auth', decodedAuth);
 						if (decodedAuth.error) {
 							console.error('unauthorized');
 							switch (storageType) {
