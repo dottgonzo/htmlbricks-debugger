@@ -27,6 +27,7 @@
 
 			localStorage.setItem($authCookieName, data.token);
 			console.info('logged');
+			goto('/store/dashboard');
 		} else {
 			try {
 				const data = await response.json();
