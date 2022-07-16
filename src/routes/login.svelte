@@ -22,7 +22,8 @@
 		console.log('server answer with', response);
 		if (response.ok) {
 			const data = await response.json();
-			console.log('server json answer', data);
+
+			localStorage.setItem('_hbtoken', data.token);
 		} else {
 			try {
 				const data = await response.json();
