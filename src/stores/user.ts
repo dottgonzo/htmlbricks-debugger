@@ -4,4 +4,4 @@ export const token: Writable<string> = writable('');
 
 export const authCookieName: Writable<string> = writable('_hbtoken');
 
-export const tokenUri: Readable<string> = readable('https://fn.freewebcomponents.com/.netlify/functions/auth');
+export const tokenUri: Readable<string> = readable('https://fn.freewebcomponents.com/.netlify/functions/auth/token');
