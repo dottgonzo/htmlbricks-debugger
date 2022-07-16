@@ -44,26 +44,14 @@
 			}
 
 			if (tk) {
-				const auth = await fetch($tokenUri, {
-					headers: { Authorization: tk, 'Content-Type': 'application/json' },
-					method: 'POST',
-					body: JSON.stringify({ token: tk })
-				});
-				if (!auth.ok) {
-					console.error('not logged');
-					switch (storageType) {
-						case 'localStorage':
-							localStorage.removeItem($authCookieName);
-							break;
-						case 'sessionStorage':
-							sessionStorage.removeItem($authCookieName);
-							break;
-					}
-					goto(`/login`);
-				} else if (auth.ok) {
-					const decodedAuth = await auth.json();
-					if (decodedAuth.error) {
-						console.error('unauthorized');
+				try {
+					const auth = await fetch($tokenUri, {
+						headers: { Authorization: tk, 'Content-Type': 'application/json' },
+						method: 'POST',
+						body: JSON.stringify({ token: tk })
+					});
+					if (!auth.ok) {
+						console.error('not logged');
 						switch (storageType) {
 							case 'localStorage':
 								localStorage.removeItem($authCookieName);
@@ -73,9 +61,26 @@
 								break;
 						}
 						goto(`/login`);
-					} else {
-						token.set(tk);
+					} else if (auth.ok) {
+						const decodedAuth = await auth.json();
+						if (decodedAuth.error) {
+							console.error('unauthorized');
+							switch (storageType) {
+								case 'localStorage':
+									localStorage.removeItem($authCookieName);
+									break;
+								case 'sessionStorage':
+									sessionStorage.removeItem($authCookieName);
+									break;
+							}
+							goto(`/login`);
+						} else {
+							token.set(tk);
+						}
 					}
+				} catch (err) {
+					console.error('server error', err);
+					goto(`/login`);
 				}
 			} else {
 				goto(`/login`);
