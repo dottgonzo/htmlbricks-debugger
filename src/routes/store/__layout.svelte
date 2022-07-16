@@ -62,7 +62,7 @@
 						}
 						goto(`/login`);
 					} else if (auth.ok) {
-						const decodedAuth = await auth.json();
+						const decodedAuth: { token: string; error?: any; _id: string } = await auth.json();
 						console.log('decoded auth', decodedAuth);
 						if (decodedAuth.error) {
 							console.error('unauthorized');
@@ -75,8 +75,12 @@
 									break;
 							}
 							goto(`/login`);
+						} else if (!decodedAuth.token) {
+							console.error('no token on answer');
+
+							goto(`/login`);
 						} else {
-							token.set(tk);
+							token.set(decodedAuth.token);
 						}
 					}
 				} catch (err) {
