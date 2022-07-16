@@ -23,17 +23,17 @@ const productionFontendUrl = 'https://demo.freewebcomponents.com'
 const developmentFontendUrl = 'http://localhost:3000'
 export const authUrl: Readable<string> = readable('https://fn.freewebcomponents.com/.netlify/functions/auth')
 
-export const oauth2providers: Readable<{ provider: string, url: string }[]> = readable([
+export const oauth2providers: Readable<{ name: string, url: string }[]> = readable([
 	// {
 	// 	provider: 'google',
 	// 	url: `https://accounts.google.com/o/oauth2/v2/auth?scope=${googleScope}&include_granted_scopes=true&response_type=token&state=state_parameter_passthrough_value&redirect_uri=${productionFontendUrl}/login&client_id=${googleClientId}`
 	// },
 	{
-		provider: 'github',
+		name: 'github',
 		url: `https://github.com/login/oauth/authorize?scope=${githubScope}&client_id=${githubClientId}&redirect_uri=${productionFontendUrl}/login?provider=github`
 	},
 	{
-		provider: 'gitlab',
+		name: 'gitlab',
 		url: `https://gitlab.com/oauth/authorize?scope=${gitlabScope}&response_type=code&state=${new Date().valueOf()}&client_id=${gitlabClientId}&redirect_uri=${productionFontendUrl}/login?provider=gitlab`
 	},
 	// {
@@ -47,7 +47,7 @@ export const oauth2providers: Readable<{ provider: string, url: string }[]> = re
 ])
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.15.30');
+export const componentsVersion: Readable<string> = readable('0.15.35');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
