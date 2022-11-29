@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	import { pageName, componentsVersion, componentsList } from '../../stores/app';
+	import { pageName, componentsVersion, componentsList } from '../../../stores/app';
 	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 
 	pageName.set('comparison');

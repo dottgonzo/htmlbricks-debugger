@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import { pageName } from '../../stores/app';
-	import SandboxBuilder from '../../components/SandboxBuilder.svelte';
+	import { pageName } from '../../../stores/app';
+	import SandboxBuilder from '../../../components/SandboxBuilder.svelte';
 	let name: string;
 	let cssVars: { name: string; value: string }[];
 	let cssParts: { name: string; content: string }[];

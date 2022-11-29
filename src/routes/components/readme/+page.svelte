@@ -1,6 +1,6 @@
 <script lang="ts">
 	import MarkdownIt from 'markdown-it';
-	import { pageName, componentsVersion } from '../../stores/app';
+	import { pageName, componentsVersion } from '../../../stores/app';
 
 	pageName.set('readme');
 	// export let definition: any;

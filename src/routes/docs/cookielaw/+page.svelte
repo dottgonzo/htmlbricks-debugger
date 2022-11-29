@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pageName, pageTitle } from '../../stores/app';
+	import { pageName, pageTitle } from '../../../stores/app';
 	pageName.set('cookielaw');
 	pageTitle.set('cookie law');
 </script>

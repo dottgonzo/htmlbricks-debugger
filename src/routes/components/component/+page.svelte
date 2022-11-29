@@ -1,6 +1,6 @@
 <script lang="ts">
-	import ComponentDebugger from '../../components/ComponentDebugger.svelte';
-	import { pageName, componentsList, debugVersion } from '../../stores/app';
+	import ComponentDebugger from '../../../components/ComponentDebugger.svelte';
+	import { pageName, componentsList, debugVersion } from '../../../stores/app';
 	import { page } from '$app/stores';
 	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 	let shortMeta: Partial<ComponentSetup>;

@@ -11,7 +11,7 @@
 	import EventsTable from './EventsTable.svelte';
 	import { componentsVersion, debugVersion, lang } from '../stores/app';
 	import { events, htmlSlotsContents, cssVarsValues, cssPartsContents } from '../stores/events';
-	import compareVersions from 'compare-versions';
+	import { compare, validate } from 'compare-versions';
 	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
 
 	// import { getAbbreviatedPackument } from 'query-registry';
@@ -49,11 +49,9 @@
 
 			const availableVersions = Object.keys(jsonfetched.versions)
 				.filter(
-					(f) =>
-						compareVersions.validate(f) &&
-						(!repoName.includes('@htmlbricks') || compareVersions.compare(f, '0.12.3', '>='))
+					(f) => validate(f) && (!repoName.includes('@htmlbricks') || compare(f, '0.12.3', '>='))
 				)
-				.sort((a, b) => (compareVersions.compare(a, b, '<') ? 1 : -1));
+				.sort((a, b) => (compare(a, b, '<') ? 1 : -1));
 
 			componentVersions = {
 				repoName: repoName,
@@ -196,7 +194,7 @@
 	function setVersion(e: { detail: { value: string } }) {
 		if (e?.detail?.value) {
 			const ver = e.detail.value;
-			if (compareVersions.validate(ver)) {
+			if (validate(ver)) {
 				if (ver !== $debugVersion) {
 					if (ver === $componentsVersion && location.href.includes('version')) {
 						location.href =

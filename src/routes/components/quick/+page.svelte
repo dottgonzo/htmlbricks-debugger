@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { pageName } from '../../stores/app';
+	import { pageName } from '../../../stores/app';
 	pageName.set('quick');
 </script>
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import ComponentDebugger from '../../components/ComponentDebugger.svelte';
+	import ComponentDebugger from '../../../components/ComponentDebugger.svelte';
 	import { page } from '$app/stores';
-	import { debugVersion, componentsVersion, pageName } from '../../stores/app';
+	import { debugVersion, componentsVersion, pageName } from '../../../stores/app';
 
 	let repo_name;
 	$: {

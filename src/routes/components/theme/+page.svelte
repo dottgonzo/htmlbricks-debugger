@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { pageName } from '../../stores/app';
-	import { defaultBootstrapThemeCssVars } from '../../stores/themes';
-	import { globalCssVarsValues } from '../../stores/events';
+	import { pageName } from '../../../stores/app';
+	import { defaultBootstrapThemeCssVars } from '../../../stores/themes';
+	import { globalCssVarsValues } from '../../../stores/events';
 	pageName.set('theme');
 	function setCssThemeVar(detail, name: string) {
 		const value = detail?.value;
