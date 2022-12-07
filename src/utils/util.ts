@@ -36,6 +36,9 @@ export function getBootstrapCategoryIcon(categoryName: string) {
 		case 'graph':
 			return 'graph-up';
 
+		case 'archives':
+			return 'archive';
+
 		case 'components':
 			return 'motherboard';
 
