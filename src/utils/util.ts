@@ -38,6 +38,8 @@ export function getBootstrapCategoryIcon(categoryName: string) {
 
 		case 'archives':
 			return 'archive';
+		case 'messages':
+			return 'chat-left-text-fill';
 
 		case 'components':
 			return 'motherboard';
