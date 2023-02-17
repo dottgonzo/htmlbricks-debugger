@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { pageName } from '../stores/app';
-	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
+	import type { ComponentSetup } from 'wc-js-utils';
 
 	export let args: any;
 	export let meta: ComponentSetup;

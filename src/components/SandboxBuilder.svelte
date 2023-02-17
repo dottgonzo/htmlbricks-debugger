@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { addComponent, type ComponentSetup } from '@htmlbricks/hb-jsutils';
+	import { addComponent, type ComponentSetup } from 'wc-js-utils';
 	import { onMount } from 'svelte';
 	import dayjs from 'dayjs';
 

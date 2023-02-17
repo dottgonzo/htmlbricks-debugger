@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CssVar } from '@htmlbricks/hb-jsutils/main';
+	import type { CssVar } from 'wc-js-utils/main';
 	import { defaultBootstrapThemeCssVars } from '../stores/themes';
 	import { pageName } from '../stores/app';
 	import { cssVarsValues } from '../stores/events';

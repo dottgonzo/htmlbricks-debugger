@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { CssPart } from '@htmlbricks/hb-jsutils/main';
+	import type { CssPart } from 'wc-js-utils/main';
 	import { cssPartsContents, type CssPartsContent } from '../stores/events';
 	import { pageName } from '../stores/app';
 

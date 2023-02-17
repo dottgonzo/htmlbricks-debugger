@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 
 	import { pageName, componentsVersion, componentsList } from '../../../stores/app';
-	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
+	import type { ComponentSetup } from 'wc-js-utils';
 
 	pageName.set('comparison');
 	let metas: { packages: ComponentSetup[]; version: string };

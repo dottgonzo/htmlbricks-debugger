@@ -12,7 +12,7 @@
 	import { componentsVersion, debugVersion, lang } from '../stores/app';
 	import { events, htmlSlotsContents, cssVarsValues, cssPartsContents } from '../stores/events';
 	import { compare, validate } from 'compare-versions';
-	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
+	import type { ComponentSetup } from 'wc-js-utils';
 
 	// import { getAbbreviatedPackument } from 'query-registry';
 

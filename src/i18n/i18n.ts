@@ -1,6 +1,6 @@
 import dictionary from './i18n.json';
 
-import { LanguageTranslator } from '@htmlbricks/hb-jsutils';
+import { LanguageTranslator } from 'wc-js-utils';
 
 let translator: LanguageTranslator;
 

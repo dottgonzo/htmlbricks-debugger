@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { HtmlSlot } from '@htmlbricks/hb-jsutils/main';
+	import type { HtmlSlot } from 'wc-js-utils/main';
 	import { htmlSlotsContents, type HtmlSlotsContent } from '../stores/events';
 	import { pageName } from '../stores/app';
 	export let slots: HtmlSlot[];

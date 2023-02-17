@@ -2,7 +2,7 @@
 	import ComponentDebugger from '../../../components/ComponentDebugger.svelte';
 	import { pageName, componentsList, debugVersion } from '../../../stores/app';
 	import { page } from '$app/stores';
-	import type { ComponentSetup } from '@htmlbricks/hb-jsutils';
+	import type { ComponentSetup } from 'wc-js-utils';
 	let shortMeta: Partial<ComponentSetup>;
 	let name;
 	$: {

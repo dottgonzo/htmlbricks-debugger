@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { INavLink } from '@htmlbricks/hb-sidenav-link/release/webcomponent.type';
-	import { addComponent, LanguageTranslator } from '@htmlbricks/hb-jsutils';
+	import { addComponent, LanguageTranslator } from 'wc-js-utils';
 	import { onMount } from 'svelte';
 	import { pageName, componentsVersion, lang, componentsList } from '../../stores/app';
 	import { events } from '../../stores/events';
