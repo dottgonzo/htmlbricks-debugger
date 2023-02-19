@@ -7,7 +7,7 @@
 		{
 			"type": "node",
 			"request": "launch",
-			"runtimeVersion": "18.14.0",
+			"runtimeVersion": "18.14.1",
 			"name": "dev site",
 			"runtimeExecutable": "npm",
 			"runtimeArgs": ["run", "dev"],
