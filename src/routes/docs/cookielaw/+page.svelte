@@ -10,10 +10,10 @@
 		data={JSON.stringify({
 			id: 'cookie-doc-english',
 			site: {
-				name: 'demo.freewebcomponents.com',
-				url: 'https://demo.freewebcomponents.com',
-				privacyPolicyUri: 'https://demo.freewebcomponents.com/privacy_policy',
-				cookiePolicyUri: 'https://demo.freewebcomponents.com/cookie_law'
+				name: 'docs.htmlbricks.borgo.studio',
+				url: 'https://docs.htmlbricks.borgo.studio',
+				privacyPolicyUri: 'https://docs.htmlbricks.borgo.studio/privacy_policy',
+				cookiePolicyUri: 'https://docs.htmlbricks.borgo.studio/cookie_law'
 			},
 			company: { name: 'INGECO S.R.L.', address: 'Piazza Cavour 33, Catania' },
 			date: '2020-01-01T00:00:00.000Z',

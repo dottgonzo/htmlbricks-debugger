@@ -8,13 +8,13 @@ export type allComponentsList = {
 
 export const pageName: Writable<string> = writable('');
 export const pageTitle: Writable<string> = writable('');
-export const componentsVersion: Readable<string> = readable('0.18.9');
+export const componentsVersion: Readable<string> = readable('0.19.28');
 export const debugVersion: Writable<string> = writable(null);
 // export const defaultRootRepo: Readable<string> = readable('@htmlbricks');
 // export const rootRepo: Writable<string> = writable(null);
 
 export const homePage: Readable<string> = readable('/components/comparison');
-export const siteUrl: Readable<string> = readable('https://demo.freewebcomponents.com');
+export const siteUrl: Readable<string> = readable('https://docs.htmlbricks.borgo.studio');
 
 export const lang: Writable<string> = writable('');
 

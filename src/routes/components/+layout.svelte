@@ -55,7 +55,7 @@
 					.open('https://github.com/dottgonzo/bootstrap-webcomponents-monorepo', '_blank')
 					.focus();
 			case 'storybook':
-				return window.open('https://storybook.freewebcomponents.com', '_blank').focus();
+				return window.open('https://storybook.htmlbricks.borgo.studio', '_blank').focus();
 			default:
 				return goto('/components/component?c=' + d.page);
 		}
